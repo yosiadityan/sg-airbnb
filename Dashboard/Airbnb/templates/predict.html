@@ -1,0 +1,156 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<main id="main">
+
+	<!-- ======= Journal Section ======= -->
+	<div id="journal" class="text-left paddsection">
+
+		<div class="container">
+		<div class="section-title text-center">
+			<h2>Predict</h2>
+		</div>
+		</div>
+
+		<div class="container">
+		<div class="journal-block">
+			<div class="row gap-3">
+
+				<form action="{{url_for('check_form')}}" method="POST">
+				<div class="container">
+					<div class="row gap-2">
+						
+						<div class="col-sm">
+
+							<div class="amenities_group">
+								<h3>Neighbourhood</h3>
+								<div class="row">
+									<div class="col-lg-12 d-flex justify-content-center">
+										<select class="form-select form-select-sm" aria-label=".form-select-sm example" name=neigh_group_select>
+											{% for group in neigh_group %}
+												return '<option value='{{group}}'>{{group}}</option>'
+											{% endfor %}
+										</select>
+									</div>
+								</div>
+							</div>
+
+							<div class="amenities_group">
+								<h3>Neighbourhood</h3>
+								<div class="row">
+									<div class="col-lg-12 d-flex justify-content-center">
+										<select class="form-select form-select-sm" aria-label=".form-select-sm example" name=neigh_select>
+											{% for group in neigh %}
+												return '<option value='{{group}}'>{{group}}</option>'
+											{% endfor %}
+										</select>
+									</div>
+								</div>
+							</div>
+
+							<div class="amenities_group">
+								<h3>Property Type</h3>
+								<div class="row">
+									<div class="col-lg-12 d-flex justify-content-center">
+										<select class="form-select form-select-sm" aria-label=".form-select-sm example" >
+											{% for group in property_type %}
+												return '<option value='{{group}}'>{{group}}</option>'
+											{% endfor %}
+										</select>
+									</div>
+								</div>
+							</div>
+
+							<div class="amenities_group">
+								<h3>Room Type</h3>
+								<div class="row">
+									<div class="col-lg-12 d-flex justify-content-center">
+										<select class="form-select form-select-sm" aria-label=".form-select-sm example" >
+											{% for group in room_type %}
+												return '<option value='{{group}}'>{{group}}</option>'
+											{% endfor %}
+										</select>
+									</div>
+								</div>
+							</div>
+
+							<div class="amenities_group">
+								<h3>Bedrooms</h3>
+								<div class="row">
+									<div class="col-lg-12 d-flex justify-content-center">
+										<select class="form-select form-select-sm" aria-label=".form-select-sm example" >
+											{% for group in bedroom %}
+												return '<option value='{{group}}'>{{group}}</option>'
+											{% endfor %}
+										</select>
+									</div>
+								</div>
+							</div>
+
+							<div class="amenities_group">
+								<h3>Beds</h3>
+								<div class="row">
+									<div class="col-lg-12 d-flex justify-content-center">
+										<select class="form-select form-select-sm" aria-label=".form-select-sm example" >
+											{% for group in bed %}
+												return '<option value='{{group}}'>{{group}}</option>'
+											{% endfor %}
+										</select>
+									</div>
+								</div>
+							</div>
+
+
+						</div>
+
+
+
+						<div class="col-sm">
+
+							<div class="amenities_group">
+								<h3>Amenities</h3>
+								<div class="row">
+									<div class="col-lg-12 d-flex justify-content-left">
+											<div class="overflow-hidden">
+											{% for group in amenities %}
+												<div class="form-check">
+													<input class="form-check-input" type="checkbox" value='{{group}}' id="flexCheckDefault" name='{{group}}+select'>
+														<label class="form-check-label" for="flexCheckDefault">{{group}}
+														</label>
+												</div>
+											{% endfor %}
+											</div>
+									</div>
+								</div>
+							</div>
+
+
+							<h3>Neighbourhood Group</h3>
+							<div class="row">
+								<div class="col-lg-12 d-flex justify-content-center">
+								<ul id="portfolio-flters">
+									<li>Central Region</li>
+									<li>West Region</li>
+									<li>East Region</li>
+									<li>North-east Region</li>
+								</ul>
+								</div>
+							</div>
+						</div>
+
+						<input type="submit" value="PREDICT" class="btn btn-primary">
+						
+					</div> <!-- Ini -->
+				</div>
+			</form>
+			</div>
+		</div>
+		</div>
+
+	</div>
+	<!-- End Journal Section -->
+
+</main>
+<!-- End #main -->	
+
+{% endblock content %}

@@ -143,14 +143,14 @@
 								</div>
 							</div>
 
-							<!-- Bathroom Type -->
+							<!-- Bathrooms Type -->
 							<div class="amenities_group">
 								<h3>Bathroom Type</h3>
 								<div class="row">
 									<div class="col-lg-12 d-flex justify-content-center">
-										<select class="form-select form-select-sm" aria-label=".form-select-sm example" name=room_type>
+										<select class="form-select form-select-sm" aria-label=".form-select-sm example" name=bathrooms_type>
 											{% for group in list_bathrooms_type %}
-												return '<option value='{{group}}'>{{group.title()}}</option>'
+												return '<option value='{{group}}'>{{group}}</option>'
 											{% endfor %}
 										</select>
 									</div>

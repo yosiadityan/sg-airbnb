@@ -5,6 +5,7 @@ import os
 import numpy as np
 import pandas as pd
 
+import pickle
 
 app = Flask(__name__)
 
@@ -51,6 +52,7 @@ def result():
 		numeric = ['accommodates', 'bedrooms', 'beds', 'price', 'minimum_nights', 
 		'maximum_nights', 'availability_30', 'calculated_host_listings_count', 
 		'total_bathrooms']
+		boolean = ['instant_bookable']
 		amenities = eval(os.getenv('list_amenities'))
 
 		for k in data:
@@ -58,25 +60,29 @@ def result():
 				data[k] = float(data[k])
 			if k in amenities:
 				data[k] = 0 if data[k] == None else 1
+			if k in boolean:
+				data[k] = True if data[k] == 'True' else False
 
 		df_to_predict = pd.DataFrame()
 		for k in input_columns:
 			df_to_predict = df_to_predict.append(pd.DataFrame.from_dict({k: data[k]}, orient='index'))
-		df_to_predict = df_to_predict.T
+		df_to_predict = df_to_predict.T.copy()
+
+		with open('Models/Trained Models/'+'best_model.pkl', 'rb') as f:
+			model = pickle.load(f)
+		price_pred = model.predict(df_to_predict)
 
 	return render_template(
 		'result.html',
-		data = df_to_predict.columns,
-		price_pred = 1000,
+		data = data,
+		price_pred = f'{price_pred[0]:.2f}',
 		bg = np.random.choice(range(0,5))
 		)
 
 @app.route('/portfolio-details/<page>', methods=['GET'])
 def portfolio_details(page):
 	
-	return render_template(
-		f'insight-{page}.html'
-		)
+	return render_template(f'insight-{page}.html')
 
 @app.route('/map/<page>', methods=['GET'])
 def show_map(page):

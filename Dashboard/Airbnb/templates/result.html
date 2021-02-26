@@ -1,0 +1,25 @@
+{% extends 'index.html' %}
+
+{% block content %}
+	<!-- ======= Hero Section ======= -->
+	<div id="hero-result" class="home" style="background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.9)), url('/static/assets/img/result/result-{{bg}}.jpg') repeat scroll center center/cover;">
+
+	<div class="container">
+		<div class="hero-content result">
+			<h1>Predicted Price of <br> Your Listing: <br> <span class="typed"></span></h1>
+			<p class="typed-items" data-typed-person="SGD {{price_pred}}"></p>
+			<p data-typed-person="SGD {{price_pred}}">ENJOY YOUR VISIT IN SINGAPORE</p>
+
+		<ul class="list-unstyled list-social">
+			<li><a href="#"><i class="ion-social-facebook"></i></a></li>
+			<li><a href="#"><i class="ion-social-twitter"></i></a></li>
+			<li><a href="#"><i class="ion-social-instagram"></i></a></li>
+			<li><a href="#"><i class="ion-social-googleplus"></i></a></li>
+			<li><a href="#"><i class="ion-social-tumblr"></i></a></li>
+			<li><a href="#"><i class="ion-social-dribbble"></i></a></li>
+		</ul>
+		</div>
+	</div>
+	</div><!-- End Hero -->
+
+{% endblock content %}

@@ -1,4 +1,10 @@
 from flask import Flask, render_template, request
+from dotenv import load_dotenv, find_dotenv
+import os
+
+import numpy as np
+import pandas as pd
+
 
 app = Flask(__name__)
 
@@ -16,45 +22,67 @@ def data():
 
 @app.route('/predict/<result>', methods=['GET', 'POST'])
 def predict(result=False):
-	neigh_group = ['Central Region', 'East Region', 'West Region', 'North-East Region']
-	neigh = ['Orchard', 'Marina Bay', 'Bedok']
-	property_type = ['House', 'Hotel']
-	room_type = ['Room1', 'Room2']
-	bedroom = ['bedroom1']
-	bed = ['bed1']
-	amenities = ['TV', 'AC', 'BBQ', 'Baby and Children Equipment', 'Ski-in/Ski-out', 'Whaser', 'Beachfront']
+	list_neighbourhood_group = eval(os.getenv('list_neighbourhood_group'))
+	list_neighbourhood = eval(os.getenv('list_neighbourhood'))
+	list_property_type = eval(os.getenv('list_property_type'))
+	list_room_type = eval(os.getenv('list_room_type'))
+	list_bathrooms_type = eval(os.getenv('list_bathrooms_type'))
+	list_amenities = sorted(eval(os.getenv('list_amenities')))
 
 	return render_template(
 		'predict.html',
 
-		neigh_group = neigh_group, 
-		neigh = neigh,
-		property_type = property_type,
-		room_type = room_type,
-		bedroom = bedroom,
-		bed = bed,
-		amenities = amenities
+		list_neighbourhood_group = list_neighbourhood_group, 
+		list_neighbourhood = list_neighbourhood,
+		list_property_type = list_property_type,
+		list_room_type = list_room_type,
+		list_amenities = list_amenities,
+		list_bathrooms_type = list_bathrooms_type
 		)
 
-@app.route('/check_form', methods=['GET', 'POST'])
-def check_form():
+@app.route('/result', methods=['GET', 'POST'])
+def result():
 	if request.method == 'POST':
-		data = request.form
-		print(data)
-		print(data)
-		print(data)
-		print(data)
-	return render_template(
-		'check_form.html',
-		data = data)
+		input = request.form
 
-@app.route('/portfolio-details', methods=['GET'])
-def portfolio_details():
+		input_columns = eval(os.getenv('list_column_input'))
+		data = {k:input.get(k) for k in input_columns}
+
+		numeric = ['accommodates', 'bedrooms', 'beds', 'price', 'minimum_nights', 
+		'maximum_nights', 'availability_30', 'calculated_host_listings_count', 
+		'total_bathrooms']
+		amenities = eval(os.getenv('list_amenities'))
+
+		for k in data:
+			if k in numeric:
+				data[k] = float(data[k])
+			if k in amenities:
+				data[k] = 0 if data[k] == None else 1
+
+		df_to_predict = pd.DataFrame()
+		for k in input_columns:
+			df_to_predict = df_to_predict.append(pd.DataFrame.from_dict({k: data[k]}, orient='index'))
+		df_to_predict = df_to_predict.T
+
+	return render_template(
+		'result.html',
+		data = df_to_predict.columns,
+		price_pred = 1000,
+		bg = np.random.choice(range(0,5))
+		)
+
+@app.route('/portfolio-details/<page>', methods=['GET'])
+def portfolio_details(page):
 	
 	return render_template(
-		'portfolio-details.html'
+		f'insight-{page}.html'
 		)
+
+@app.route('/map/<page>', methods=['GET'])
+def show_map(page):
+	return render_template(f'insight-{page}-map.html')
 
 
 if __name__ == '__main__':
+	load_dotenv(find_dotenv())
 	app.run(debug=True, port=5000)

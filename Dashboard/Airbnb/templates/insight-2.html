@@ -1,0 +1,27 @@
+{% extends 'portfolio-details.html' %}
+
+{% block content %}
+
+    <div class="owl-carousel">
+              <center>
+                <img src="/static/assets/img/portfolio/insight-1.png" class="img-fluid" alt="">
+              </center>
+          </div>
+
+          <div class="portfolio-info">
+            <h3>Technical Information</h3>
+            <ul>
+              <li><strong>Graph Type</strong>: Geographical Map</li>
+              <li><strong>Packages</strong>: Folium, Branca</li>
+              <li><strong>Graph URL</strong>: <a href="{{url_for('show_map', page=2)}}">Click Here</a></li>
+              <!-- <li><strong>Project date</strong>: 01 March, 2020</li>
+              <li><strong>Project URL</strong>: <a href="#">www.example.com</a></li> -->
+            </ul>
+          </div>
+
+        </div>
+
+        <div class="portfolio-description">
+          <h2>This is an example of portfolio detail</h2>
+
+{% endblock content %}

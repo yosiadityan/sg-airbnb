@@ -16,18 +16,19 @@
 		<div class="journal-block">
 			<div class="row gap-3">
 
-				<form action="{{url_for('check_form')}}" method="POST">
+				<form action="{{url_for('result')}}" method="POST">
 				<div class="container">
 					<div class="row gap-2">
 						
 						<div class="col-sm">
 
+							<!-- Neighbourhood Group -->
 							<div class="amenities_group">
-								<h3>Neighbourhood</h3>
+								<h3>Neighbourhood Group</h3>
 								<div class="row">
 									<div class="col-lg-12 d-flex justify-content-center">
-										<select class="form-select form-select-sm" aria-label=".form-select-sm example" name=neigh_group_select>
-											{% for group in neigh_group %}
+										<select class="form-select form-select-sm" aria-label=".form-select-sm example" name=neighbourhood_group_cleansed>
+											{% for group in list_neighbourhood_group %}
 												return '<option value='{{group}}'>{{group}}</option>'
 											{% endfor %}
 										</select>
@@ -35,25 +36,13 @@
 								</div>
 							</div>
 
-							<div class="amenities_group">
-								<h3>Neighbourhood</h3>
-								<div class="row">
-									<div class="col-lg-12 d-flex justify-content-center">
-										<select class="form-select form-select-sm" aria-label=".form-select-sm example" name=neigh_select>
-											{% for group in neigh %}
-												return '<option value='{{group}}'>{{group}}</option>'
-											{% endfor %}
-										</select>
-									</div>
-								</div>
-							</div>
-
+							<!-- Property Type -->
 							<div class="amenities_group">
 								<h3>Property Type</h3>
 								<div class="row">
 									<div class="col-lg-12 d-flex justify-content-center">
-										<select class="form-select form-select-sm" aria-label=".form-select-sm example" >
-											{% for group in property_type %}
+										<select class="form-select form-select-sm" aria-label=".form-select-sm example" name=property_type>
+											{% for group in list_property_type %}
 												return '<option value='{{group}}'>{{group}}</option>'
 											{% endfor %}
 										</select>
@@ -61,39 +50,107 @@
 								</div>
 							</div>
 
+							<!-- Accomodates -->
 							<div class="amenities_group">
-								<h3>Room Type</h3>
+								<h3>Accomodates</h3>
 								<div class="row">
 									<div class="col-lg-12 d-flex justify-content-center">
-										<select class="form-select form-select-sm" aria-label=".form-select-sm example" >
-											{% for group in room_type %}
-												return '<option value='{{group}}'>{{group}}</option>'
-											{% endfor %}
-										</select>
+										<input type="number" step="1" min="1" max="16" placeholder="Number of people can accomodate" value="1" name=accommodates style="width:100%;">
 									</div>
 								</div>
 							</div>
 
+							<!-- Bedrooms -->
 							<div class="amenities_group">
 								<h3>Bedrooms</h3>
 								<div class="row">
 									<div class="col-lg-12 d-flex justify-content-center">
-										<select class="form-select form-select-sm" aria-label=".form-select-sm example" >
-											{% for group in bedroom %}
-												return '<option value='{{group}}'>{{group}}</option>'
-											{% endfor %}
+										<input type="number" step="1" min="1" max="8" placeholder="Number of bedrooms available" value="1" name=bedrooms style="width:100%;">
+									</div>
+								</div>
+							</div>
+
+							<!-- Beds -->
+							<div class="amenities_group">
+								<h3>Beds</h3>
+								<div class="row">
+									<div class="col-lg-12 d-flex justify-content-center">
+										<input type="number" step="1" min="1" max="58" placeholder="Number of beds available" value="1" name=beds style="width:100%;">
+									</div>
+								</div>
+							</div>
+
+							<!-- Minimum Nights -->
+							<div class="amenities_group">
+								<h3>Minimum Nights</h3>
+								<div class="row">
+									<div class="col-lg-12 d-flex justify-content-center">
+										<input type="number" step="1" min="1" max="1100" placeholder="Number of beds available" value="1" name=minimum_nights style="width:100%;">
+									</div>
+								</div>
+							</div>
+
+							<!-- Maximum Nights -->
+							<div class="amenities_group">
+								<h3>Maximum Nights</h3>
+								<div class="row">
+									<div class="col-lg-12 d-flex justify-content-center">
+										<input type="number" step="1" min="1" max="100000" placeholder="Number of beds available" value="1" name=maximum_nights style="width:100%;">
+									</div>
+								</div>
+							</div>
+
+							<!-- Availability 30 -->
+							<div class="amenities_group">
+								<h3>Availability in 30 Days</h3>
+								<div class="row">
+									<div class="col-lg-12 d-flex justify-content-center">
+										<input type="number" step="1" min="1" max="30" placeholder="Number of beds available" value="1" name=availability_30 style="width:100%;">
+									</div>
+								</div>
+							</div>
+
+							<!-- Instant Bookable -->
+							<div class="amenities_group">
+								<h3>Instant Bookable</h3>
+								<div class="row">
+									<div class="col-lg-12 d-flex justify-content-center">
+										<select class="form-select form-select-sm" aria-label=".form-select-sm example" name=instant_bookable>
+											<option value='True'>Yes</option>
+											<option value='False'>No</option>
 										</select>
 									</div>
 								</div>
 							</div>
 
+							<!-- Total Listings -->
 							<div class="amenities_group">
-								<h3>Beds</h3>
+								<h3>Total Listings</h3>
 								<div class="row">
 									<div class="col-lg-12 d-flex justify-content-center">
-										<select class="form-select form-select-sm" aria-label=".form-select-sm example" >
-											{% for group in bed %}
-												return '<option value='{{group}}'>{{group}}</option>'
+										<input type="number" step="1" min="1" max="142" placeholder="Number of beds available" value="1" name=calculated_host_listings_count style="width:100%;">
+									</div>
+								</div>
+							</div>
+
+							<!-- Total Bathrooms -->
+							<div class="amenities_group">
+								<h3>Total Bathrooms</h3>
+								<div class="row">
+									<div class="col-lg-12 d-flex justify-content-center">
+										<input type="number" step="1" min="1" max="21" placeholder="Number of beds available" value="1" name=total_bathrooms style="width:100%;">
+									</div>
+								</div>
+							</div>
+
+							<!-- Bathroom Type -->
+							<div class="amenities_group">
+								<h3>Bathroom Type</h3>
+								<div class="row">
+									<div class="col-lg-12 d-flex justify-content-center">
+										<select class="form-select form-select-sm" aria-label=".form-select-sm example" name=room_type>
+											{% for group in list_bathrooms_type %}
+												return '<option value='{{group}}'>{{group.title()}}</option>'
 											{% endfor %}
 										</select>
 									</div>
@@ -107,14 +164,43 @@
 
 						<div class="col-sm">
 
+							<!-- Neighbourhood -->
+							<div class="amenities_group">
+								<h3>Neighbourhood</h3>
+								<div class="row">
+									<div class="col-lg-12 d-flex justify-content-center">
+										<select class="form-select form-select-sm" aria-label=".form-select-sm example" name=neighbourhood_cleansed>
+											{% for group in list_neighbourhood %}
+												return '<option value='{{group}}'>{{group}}</option>'
+											{% endfor %}
+										</select>
+									</div>
+								</div>
+							</div>
+
+							<!-- Room Type -->
+							<div class="amenities_group">
+								<h3>Room Type</h3>
+								<div class="row">
+									<div class="col-lg-12 d-flex justify-content-center">
+										<select class="form-select form-select-sm" aria-label=".form-select-sm example" name=room_type>
+											{% for group in list_room_type %}
+												return '<option value='{{group}}'>{{group}}</option>'
+											{% endfor %}
+										</select>
+									</div>
+								</div>
+							</div>
+
+							<!-- Amenities -->
 							<div class="amenities_group">
 								<h3>Amenities</h3>
 								<div class="row">
 									<div class="col-lg-12 d-flex justify-content-left">
 											<div class="overflow-hidden">
-											{% for group in amenities %}
+											{% for group in list_amenities %}
 												<div class="form-check">
-													<input class="form-check-input" type="checkbox" value='{{group}}' id="flexCheckDefault" name='{{group}}+select'>
+													<input class="form-check-input" type="checkbox" value='{{group}}' id="flexCheckDefault" name='{{group}}'>
 														<label class="form-check-label" for="flexCheckDefault">{{group}}
 														</label>
 												</div>
@@ -124,8 +210,7 @@
 								</div>
 							</div>
 
-
-							<h3>Neighbourhood Group</h3>
+							<!-- <h3>Neighbourhood Group</h3>
 							<div class="row">
 								<div class="col-lg-12 d-flex justify-content-center">
 								<ul id="portfolio-flters">
@@ -135,7 +220,8 @@
 									<li>North-east Region</li>
 								</ul>
 								</div>
-							</div>
+							</div> -->
+
 						</div>
 
 						<input type="submit" value="PREDICT" class="btn btn-primary">

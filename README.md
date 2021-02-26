@@ -1,4 +1,6 @@
 # Singapore's Airbnb Price Predictor
+![alt text](https://images.unsplash.com/photo-1483070472046-4defb528eff3?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80)
+<span>Photo by <a href="https://unsplash.com/@lvnatikk?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Lily Banse</a> on <a href="https://unsplash.com/s/photos/singapore?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
 
 ## Problem Statement
 Who doesn't like to travel? Traveling is a such fun activity, coming into new place and experience many new things. It is a part of crucial aspect in life as it's the best way to escape from hectic and busy schedule. It also improves the mental and physical health while it's a good remedy for stress, anxiety and depression. As part of travelling, deciding accomodation or where you should sleep and charge your body is definitely important thing to decide. One of the choice to spend your night, apart from conventional hotel is Airbnb.

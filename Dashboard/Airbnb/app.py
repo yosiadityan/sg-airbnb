@@ -10,6 +10,7 @@ import sqlalchemy as db
 import plotly
 import plotly.graph_objs as go
 import json
+import requests
 
 app = Flask(__name__)
 
@@ -28,21 +29,21 @@ def data():
 @app.route('/predict/<result>', methods=['GET', 'POST'])
 def predict(result=False):
 	list_neighbourhood_group = eval(os.getenv('list_neighbourhood_group'))
-	list_neighbourhood = eval(os.getenv('list_neighbourhood'))
 	list_property_type = eval(os.getenv('list_property_type'))
 	list_room_type = eval(os.getenv('list_room_type'))
-	list_bathrooms_type = eval(os.getenv('list_bathrooms_type'))
+	list_bathroom_type = eval(os.getenv('list_bathroom_type'))
 	list_amenities = sorted(eval(os.getenv('list_amenities')))
+	list_neighbourhood_names = eval(os.getenv('list_neighbourhood_names'))
 
 	return render_template(
 		'predict.html',
 
 		list_neighbourhood_group = list_neighbourhood_group, 
-		list_neighbourhood = list_neighbourhood,
 		list_property_type = list_property_type,
 		list_room_type = list_room_type,
 		list_amenities = list_amenities,
-		list_bathrooms_type = list_bathrooms_type
+		list_bathroom_type = list_bathroom_type,
+		list_neighbourhood_names = list_neighbourhood_names
 		)
 
 @app.route('/result', methods=['GET', 'POST'])
@@ -59,6 +60,15 @@ def result():
 		'calculated_host_listings_count_private_rooms', 'calculated_host_listings_count_shared_rooms']
 		boolean = ['instant_bookable']
 		amenities = eval(os.getenv('list_amenities'))
+
+		data['neighbourhood_group_cleansed'] = eval(input.get('neighbourhood'))[0]
+		data['neighbourhood_cleansed'] = eval(input.get('neighbourhood'))[1]
+
+		address = input.get('address')+ ', Singapore'
+		params = {'q': address, 'apiKey': os.getenv('apiKey')}
+		response = requests.get(os.getenv('heremaps'), params=params)
+		data['latitude'] = response.json()['items'][0]['position']['lat']
+		data['longitude'] = response.json()['items'][0]['position']['lng']
 
 		for k in data:
 			if k in numeric:

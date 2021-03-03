@@ -114,7 +114,7 @@ def make_plot(page):
                .groupby(['neighbourhood_group_cleansed', 'neighbourhood_cleansed'])
                .agg(Count=('id', 'count'))).reset_index()
 		neigh_group_map = {x:idx for idx, x in enumerate(sankey_data.neighbourhood_group_cleansed.unique())}
-		colors = ["#ffbe0b","#fb5607","#ff006e","#8338ec","#3a86ff"]
+		colors = ["#ffbe0b","#fb5607","#8338ec","#ff006e","#3a86ff"]
 
 		sankey_data['neigh_group'] = sankey_data.neighbourhood_group_cleansed.map(neigh_group_map)
 		sankey_data['neigh'] = [x+5 for x in sankey_data.index.tolist()]
@@ -128,7 +128,7 @@ def make_plot(page):
                        sankey_data.neighbourhood_cleansed.unique().tolist()),
                 customdata=(sankey_data.neighbourhood_group_cleansed.unique().tolist() + 
                             sankey_data.neighbourhood_cleansed.unique().tolist()),
-                color=["#ffbe0b","#fb5607","#ff006e","#8338ec","#3a86ff"] + sankey_data.neigh_colors.tolist(),
+                color=["#ffbe0b","#fb5607","#8338ec","#ff006e","#3a86ff"] + sankey_data.neigh_colors.tolist(),
                 hovertemplate='%{customdata} has total listing of %{value}<extra></extra>',
                ),
 			link = dict(source=sankey_data.neigh_group.tolist(), 

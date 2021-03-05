@@ -1,5 +1,5 @@
 # Singapore's Airbnb Price Predictor
-<br></br>
+
 <a href="http://sg-airbnb.yosiadityan.xyz/">
 	<img src="https://img.shields.io/static/v1?label=Live%20Dashboard&message=Online&color=brightgreen&style=for-the-badge&logo=heroku">
 </a>
